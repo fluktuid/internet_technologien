@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//DE"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" lang="de">
+<head>
+<title>Amazon light - Orders</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="html_kickstart/js/kickstart.js"></script>
+<link rel="stylesheet" href="html_kickstart/css/kickstart.css"
+	media="all" />
+<!-- KICKSTART -->
+
+</head>
+<body>
+	<h:form id="ordersform">
+		<table>
+			<tr>
+				<td>date</td>
+				<td>name</td>
+				<td>city</td>
+				<td>Anzahl Bücher</td>
+				<td>cost</td>
+			</tr>
+			<ui:repeat id="repeater" value="#{ordersHandler.orders}"
+				varStatus="status" var="order">
+				<tr>
+					<td>#{order.date}</td>
+					<td>#{order.name}</td>
+					<td>#{order.city}</td>
+					<td>#{order.bookCount}</td>
+					<td>#{ordersHandler.getSum(order)}</td>
+				</tr>
+			</ui:repeat>
+		</table>
+	</h:form>
+	© Okko Veenhuis, Tobias Boge, Lukas f. Paluch
+</body>
+</html>

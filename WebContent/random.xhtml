@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//DE"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" lang="de">
+<head>
+<title>Amazon light</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="html_kickstart/js/kickstart.js"></script>
+<link rel="stylesheet" href="html_kickstart/css/kickstart.css"
+	media="all" />
+<!-- KICKSTART -->
+</head>
+<body>
+	<h:outputText value="#{categoryHandler.quote}" escape="false" />
+		<h:form id="navigationform">
+		<div align="center">
+			<ul class="menu">
+				<li class="current"><h:commandLink
+						action="#{categoryHandler.setCategory()}">
+						<i class="fa fa-book"></i> Katalog
+								</h:commandLink>
+						<ul>
+							<ui:repeat id="repeater" value="#{categoryHandler.categories}"
+								varStatus="status" var="category">
+								<li class="first"><h:commandLink
+										action="#{categoryHandler.setCategory(category)}">
+									#{category}
+								</h:commandLink></li>
+							</ui:repeat>
+						</ul></li>
+				<li><a href="random.jsf"><i class="fa fa-random"></i>
+						Zufällig</a></li>
+				<li><a href="home.jsf"><i class="fa fa-area-chart"></i>
+						Empfehlungen</a></li>
+				<li><a href="cart.jsf"><i class="fa fa-shopping-cart"></i>
+						Warenkorb</a></li>
+				<li><a href="pay.jsf"><i class="fa fa-btc"></i> zur Kasse</a></li>
+			</ul>
+		</div>
+	</h:form>
+	<h:form id="bookform">
+		<ui:repeat id="repeater" value="#{randomHandler.books}"
+			varStatus="status" var="book">
+			<div align="left">
+				<table>
+					<tr>
+						<td><img
+							src="https://images-na.ssl-images-amazon.com/images/I/51uwrSEjroL._AC_UL320_SR200,320_.jpg"
+							alt="Cover #{book.name}" /></td>
+						<td>
+							<p>#{book.name}</p>
+							<p>#{book.description}</p>
+							<p>#{book.isbn}</p>
+							<p>
+								<h:commandButton action="#{randomHandler.addToCart(1)}"
+									class="large green" value="kaufen" />
+							</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</ui:repeat>
+	</h:form>
+	© Okko Veenhuis, Tobias Boge, Lukas f. Paluch
+</body>
+</html>

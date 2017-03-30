@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//DE"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core" lang="de">
+<head>
+<title>Amazon light</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="html_kickstart/js/kickstart.js"></script>
+<link rel="stylesheet" href="html_kickstart/css/kickstart.css"
+	media="all" />
+<!-- KICKSTART -->
+</head>
+<body>
+	<h:outputText value="#{categoryHandler.quote}" escape="false" />
+		<h:form id="navigationform">
+		<div align="center">
+			<ul class="menu">
+				<li class="current"><h:commandLink
+						action="#{categoryHandler.setCategory()}">
+						<i class="fa fa-book"></i> Katalog
+								</h:commandLink>
+						<ul>
+							<ui:repeat id="repeater" value="#{categoryHandler.categories}"
+								varStatus="status" var="category">
+								<li class="first"><h:commandLink
+										action="#{categoryHandler.setCategory(category)}">
+									#{category}
+								</h:commandLink></li>
+							</ui:repeat>
+						</ul></li>
+				<li><a href="random.jsf"><i class="fa fa-random"></i>
+						Zufällig</a></li>
+				<li><a href="home.jsf"><i class="fa fa-area-chart"></i>
+						Empfehlungen</a></li>
+				<li><a href="cart.jsf"><i class="fa fa-shopping-cart"></i>
+						Warenkorb</a></li>
+				<li><a href="pay.jsf"><i class="fa fa-btc"></i> zur Kasse</a></li>
+			</ul>
+		</div>
+	</h:form>
+	<div align="center" style="width: 65%; margin: 0 auto;">
+		<h1>Vielen Dank für Ihr Vertrauen</h1>
+		<h2>#{pay2Handler.checkoutText}</h2>
+		<h2>
+			das Team
+			</h2>
+	</div>
+	© Okko Veenhuis, Tobias Boge, Lukas f. Paluch
+</body>
+</html>

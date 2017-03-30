@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//DE"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" lang="de">
+<head>
+<title>Amazon light</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="html_kickstart/js/kickstart.js"></script>
+<script>
+function calculateTotalPrice() {
+	var price = #{detailHandler.price};
+
+	//var amm = document.getElementById("ammount").value
+    var amm = document.getElementsByTagName("input")[2].value;
+	var total = price*amm;
+	document.getElementById("totalPrice").innerHTML=total;
+
+}
+</script>
+<link rel="stylesheet" href="html_kickstart/css/kickstart.css"
+	media="all" />
+<!-- KICKSTART -->
+</head>
+<body>
+	<h:outputText value="#{categoryHandler.quote}" escape="false" />
+	<h:form id="navigationform">
+		<div align="center">
+			<ul class="menu">
+				<li class="current"><h:commandLink
+						action="#{categoryHandler.setCategory()}">
+						<i class="fa fa-book"></i> Katalog
+								</h:commandLink>
+					<ul>
+						<ui:repeat id="repeater" value="#{categoryHandler.categories}"
+							varStatus="status" var="category">
+							<li class="first"><h:commandLink
+									action="#{categoryHandler.setCategory(category)}">
+									#{category}
+								</h:commandLink></li>
+						</ui:repeat>
+					</ul></li>
+				<li><a href="random.jsf"><i class="fa fa-random"></i>
+						Zufällig</a></li>
+				<li><a href="home.jsf"><i class="fa fa-area-chart"></i>
+						Empfehlungen</a></li>
+				<li><a href="cart.jsf"><i class="fa fa-shopping-cart"></i>
+						Warenkorb</a></li>
+				<li><a href="pay.jsf"><i class="fa fa-btc"></i> zur Kasse</a></li>
+			</ul>
+		</div>
+	</h:form>
+
+	<h:form id="detailform">
+		<div style="width: 75%; margin: 0 auto;">
+			<table>
+				<tr>
+					<td><img
+						src="#{detailHandler.url}"
+						alt="Cover #{detailHandler.title}" /></td>
+					<td>
+						<h2>#{detailHandler.title}</h2>
+						<p>#{detailHandler.description}</p>
+						<p>
+							<b>Autor:</b> #{detailHandler.author}
+						</p>
+						<p>
+							<b>ISBN:</b> #{detailHandler.isbn}
+						</p>
+						<p>
+							Menge:
+							<h:form>
+								<h:inputText converter="javax.faces.Integer" id="ammount"
+									type="number" class="text-line" value="1" binding="#{ammount}"
+									onkeyup='calculateTotalPrice()'>
+								</h:inputText>
+							</h:form>
+						</p>
+						<p>
+							<h:commandButton action="#{detailHandler.addBook(ammount.value)}"
+								value="kaufen" class="large green">
+							</h:commandButton>
+						</p>
+						<h4>
+							Preis: #{detailHandler.price} <i class="fa fa-btc"></i>
+						</h4>
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td>
+						<h4>Gesamtpreis:</h4>
+					</td>
+					<td>
+						<p>
+						<h4>
+							<p id="totalPrice">#{detailHandler.price}</p>
+							<i class="fa fa-btc"></i>
+						</h4>
+						</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</h:form>
+	© Okko Veenhuis, Tobias Boge, Lukas f. Paluch
+</body>
+</html>
